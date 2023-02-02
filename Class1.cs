@@ -1,79 +1,57 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace csharp_hw1
+namespace antra_cs_hw2
 {
-    public void Main()
+    public class hw2_solution
     {
-       public class Solution
-    {
-        public int[] TwoSum_1(int[] numbers, int target)
+       public int[] Generatenum()
         {
-            for (int i = 0; i < numbers.Length; i++)
+            int upper = 20;
+            int rndnum = RandomNumberGenerator.GetInt32(upper);
+            int[] ans = new int[rndnum];
+            for(int i = 0; i < rndnum; i++)
             {
-                for (int j = i + 1; j < numbers.Length; j++)
-                {
-                    if (numbers[i] + numbers[j] == target)
-                    {
-                        return new int[2] { i, j };
-                    }
-                }
-            }
-            return new int[2];
-        }
-        public int[] TwoSum_2(int[] numbers, int target)
-        {
-            Dictionary<int, int> dict = new Dictionary<int, int>();
-            foreach(int i in numbers)
-            {
-                dict.Add(numbers[i], i);
-            }
-            for(int i = 0; i < numbers.Length; i++)
-            {
-                if (dict.ContainsKey(target - numbers[i]))
-                {
-                    return new int[2] { i, dict[target - numbers[i]};
-                }
-            }
-            return new int[2];
-        }
-        public List<List<int>> ThreeSum(int[] numbers)
-        {
-            if(numbers.Length<3) return new List<List<int>>();
-            Array.Sort(numbers);
-            List<List<int>> ans = new List<List<int>>();
-            //using two pointer method
-            for(int i = 0; i < numbers.Length - 2; i++)
-            {
-                int lf = 1 + i;
-                int rt = numbers.Length - 1;
-                if (numbers[i] > 0 || (numbers[i] == numbers[i - 1] && i > 0)) continue;
-                while (lf < rt)
-                {
-                    if (numbers[i] + numbers[lf] + numbers[rt] == 0)
-                    {
-                        List<int> tempans = new List<int>{ numbers[i],numbers[lf],numbers[rt]};
-                        ans.Add(tempans);
-                        lf++;
-                        rt--;
-                    }else if (numbers[i] + numbers[lf] + numbers[rt] < 0)
-                    {
-                        lf++;
-                    }
-                    else
-                    {
-                        rt--;
-                    }
-                }
+                ans[i] = i+1;
             }
             return ans;
 
         }
-
+        public int[] Reversenum(int[] arrs)
+        {
+            int sz = arrs.Length;
+            int[] ans = new int[sz];
+            for(int i = 0; i < sz; i++)
+            {
+                ans[sz - i] = i + 1;
+            }
+            return ans;
+        }
+        public void PrintNum(int[] arrs)
+        {
+            for(int i = 0; i < arrs.Length; i++)
+            {
+                Console.WriteLine(arrs[i]);
+            }
+        }
+        public int Fibo(int num)
+        {
+            if (num <= 0) return 0;
+            if (num <= 2) return 1;
+            int[] ls = new int[num+1];
+            ls[0] = 0;
+            ls[1] = 1;
+            ls[2] = 1;
+            for(int i = 3; i < num; i++)
+            {
+                ls[i] = ls[i - 1] + ls[i - 2];
+            }
+            return ls[num];
+        }
     }
-    
 }
